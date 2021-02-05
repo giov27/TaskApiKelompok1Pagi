@@ -12,5 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giov27/TaskApiKelompok1Pagi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/giov27/TaskApiKelompok1Pagi/issues"
+  },
+  "homepage": "https://github.com/giov27/TaskApiKelompok1Pagi#readme"
 }
