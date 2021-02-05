@@ -2,11 +2,11 @@ const express = require("express")
 const db = require("../db/dbItems")
 const app = express.Router()
 
-app.get("/:path", (req, res) => {
-    inierror
-})
+// app.get("/:path", (req, res) => {
+//     inierror
+// })
 
-app.get("/item/", (req, res) => {
+app.get("/item", (req, res) => {
     res.send(db)
 })
 

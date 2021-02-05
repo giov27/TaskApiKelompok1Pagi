@@ -2,7 +2,7 @@ const express = require("express")
 const db = require("../db/dbTransactions")
 const app = express.Router()
 
-app.get("/transaction/", (req, res) => {
+app.get("/transaction", (req, res) => {
     res.send(db)
 })
 
