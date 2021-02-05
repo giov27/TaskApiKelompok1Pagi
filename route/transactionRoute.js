@@ -7,10 +7,17 @@ app.get("/transaction/", (req, res) => {
 })
 
 app.get("/transaction/:id", (req, res) => {
-    var index = db.map(function (transaction) {
-        return transaction.id
-    }).indexOf(Number(req.params.id));
-    res.send(db[index])
+    const id = req.params.id
+    if (!Number(id)) {
+        res.status(400).send("Masukkan angka yaa :)")
+    } else if (db.length < id || 0) {
+        res.status(400).send(`Mohon maaf, tidak ada data transaction dengan id ${id}`)
+    } else {
+        var index = db.map(function (transaction) {
+            return transaction.id
+        }).indexOf(Number(id));
+        res.send(db[index])
+    }
 })
 
 app.post("/transaction/", (req, res) => {

@@ -8,8 +8,9 @@ app.use(express.json())
 app.use(itemRoute)
 app.use(friendRoute)
 app.use(transactionRoute)
-app.use(function (error, req, res, next) {
-    res.send(error.message)
+app.use((req, res, next) => {
+    res.status(404)
+    res.send("404 Page Not Found")
 })
 
 const port = 3000
