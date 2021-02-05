@@ -1,31 +1,31 @@
 module.exports = [{
     id: 1,
-    name: 'Giovanni',
+    username: 'Giovanni',
     password: '1234'
 },
 {
     id: 2,
-    name: 'Rohim',
+    username: 'Rohim',
     password: '12345'
 },
 {
     id: 3,
-    name: 'Siski',
+    username: 'Siski',
     password: '123456'
 },
 {
     id: 4,
-    name: 'Nisa',
+    username: 'Nisa',
     password: '1234567'
 },
 {
     id: 5,
-    name: 'Chania',
+    username: 'Chania',
     password: '12345678'
 },
 {
     id: 6,
-    name: 'Alya',
+    username: 'Alya',
     password: '123456789'
 }
 ]
