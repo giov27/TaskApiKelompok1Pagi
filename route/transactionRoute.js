@@ -3,7 +3,7 @@ const db = require("../db/dbTransactions")
 const app = express.Router()
 
 
-// CRUD put Transaction
+// put Transaction
 app.put('/Transaction/:id', (req, res) => {
     db[req.params.index] = req.body
     res.send(req.body)

@@ -2,7 +2,7 @@ const express = require("express")
 const db = require("../db/dbFriends")
 const app = express.Router()
 
-// CRUD put Friend
+// put Friend
 app.put('/friend/:id', (req, res) => {
     db[req.params.index] = req.body
     res.send(req.body)

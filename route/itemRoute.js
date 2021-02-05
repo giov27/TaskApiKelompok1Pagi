@@ -2,7 +2,7 @@ const express = require("express")
 const db = require("../db/dbItems")
 const app = express.Router()
 
-// CRUD Item
+// put Item
 app.put('/item/:id', (req, res) => {
     db[req.params.index] = req.body
     res.send(req.body)
