@@ -1,0 +1,16 @@
+{
+  "name": "taskapikelompok1pagi",
+  "version": "1.0.0",
+  "description": "Create an API to finish task from SYNRGY Academy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "kelompok1Pagi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
