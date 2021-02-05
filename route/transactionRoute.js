@@ -7,43 +7,21 @@ app.get("/transaction", (req, res) => {
 })
 
 app.get("/transaction/:id", (req, res) => {
+    const id = req.params.id
     var index = db.map(function (transaction) {
         return transaction.id
-    }).indexOf(Number(req.params.id));
-    res.send(db[index])
-})
-
-app.post("/transaction/", (req, res) => {
-    db.push(req.body)
-    res.send(req.body)
-})
-
-
-app.get("/transaction/", (req, res) => {
-    res.send(db)
-})
-
-app.get("/transaction/:id", (req, res) => {
-    const id = req.params.id
-    if (!Number(id)) {
-        res.status(400).send("Masukkan angka yaa :)")
-    } else if (db.length < id || 0) {
-        res.status(400).send(`Mohon maaf, tidak ada data transaction dengan id ${id}`)
+    }).indexOf(Number(id));
+    if (db[index] === undefined) {
+        res.status(400).send("Data not found")
     } else {
-        var index = db.map(function (transaction) {
-            return transaction.id
-        }).indexOf(Number(id));
         res.send(db[index])
     }
 })
 
-app.post("/transaction/", (req, res) => {
-    db.push(req.body)
-    res.send(req.body)
-})
-
 app.get('/eror', (req, res) => {
-    console.log("Ini Halaman Eror")
+    console.log(message)
+    message = "Ini halaman Eror"
+    // eror tampil di node
 })
 
 module.exports = app
