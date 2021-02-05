@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require('express')
 const db = require("../db/dbTransactions")
 const app = express.Router()
 
@@ -18,9 +18,6 @@ app.post("/transaction/", (req, res) => {
     res.send(req.body)
 })
 
-const express = require("express")
-const db = require("../db/dbTransactions")
-const app = express.Router()
 
 app.get("/transaction/", (req, res) => {
     res.send(db)
@@ -43,6 +40,10 @@ app.get("/transaction/:id", (req, res) => {
 app.post("/transaction/", (req, res) => {
     db.push(req.body)
     res.send(req.body)
+})
+
+app.get('/eror', (req, res) => {
+    console.log("Ini Halaman Eror")
 })
 
 module.exports = app

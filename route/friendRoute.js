@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require('express')
 const db = require("../db/dbFriends")
 const app = express.Router()
 
@@ -17,10 +17,6 @@ app.post("/friend/:id", (req, res) => {
     db.push(req.body)
     res.send(req.body)
 })
-
-const express = require("express")
-const db = require("../db/dbFriends")
-const app = express.Router()
 
 app.get("/friend/", (req, res) => {
     res.send(db)
@@ -45,4 +41,7 @@ app.post("/friend/", (req, res) => {
     res.send(req.body)
 })
 
+app.get('/eror', (req, res) => {
+    console.log("Ini Halaman Eror")
+})
 module.exports = app
