@@ -4,13 +4,21 @@
   "description": "Create an API to finish task from SYNRGY Academy",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon -L index js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "kelompok1Pagi",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giov27/TaskApiKelompok1Pagi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/giov27/TaskApiKelompok1Pagi/issues"
+  },
+  "homepage": "https://github.com/giov27/TaskApiKelompok1Pagi#readme"
 }
