@@ -1,17 +1,40 @@
 const { response } = require("express")
 const express = require("express")
-const db = require("../db")
+const db = require("../dbRegister")
 const app = express.Router()
 
 // Get the User's Data in DB
-app.get('/', (req, res) => {
-    res.send(db)
+app.get('/user_list', (req, res) => {
+    res.send(`Total user: ${db.length}`)
 });
 
+//Register Feature
+app.post('/register', (req, res) => {
+    const {
+        username,
+        password
+    } = req.body
+    // const forbiddenChar = "@", "+", "{", "}", "?"
+    const splitstring = username.split("")
+    console.log(splitstring.includes('@') === false);
+    if (username.length > 0 && splitstring.includes('@') === false) {
+        db.push(req.body)
+        db[db.length - 1].id = db.length
+        res.send(req.body)
+    } else {
+        res.send("username can't use")
+    }
+})
+
+//Login feature
 app.post('/auth', (req, res) => {
-    const username = req.body.username
-    const password = req.body.password
-    // console.log(username);
+    const {
+        username,
+        password
+    } = req.body
+    // const username = req.body.username
+    // const password = req.body.password
+    console.log(db.find(item => item.username === username));
     if (username.length > 0 && db.find(item => item.username === username)) {
         const index = db.findIndex(item => item.username === username)
         // console.log(index);
