@@ -4,11 +4,6 @@ const app = express.Router()
 
 // CRUD Transaction
 app.put('/transaction/:id', (req, res) => {
-    db[req.params.index] = req.body
-    res.send(req.body)
-})
-
-app.put('/transaction/:id', (req, res) => {
     const id = req.params.id
     if (!Number(id)) {
         res.status(400).send("hayoo id hayoo")
@@ -43,20 +38,8 @@ app.post("/transaction", (req, res) => {
         itemId: req.body.itemId,
         nominal: req.body.nominal
     }
-    // if (!req.body.name || req.body.name.length < 3) {
-    //     res.status(400).send('Mohon isi name lebih dari 3 character')
-    //     return;
-    if ((!req.body.userId || req.body.userId.length < 3)) {
-        res.status(400).send('Mohon isi  userId lebih dari 3 character')
-        return;
-    } else if ((!req.body.friendId || req.body.friendId.length < 3)) {
-        res.status(400).send('Mohon isi  friendId lebih dari 3 character')
-        return;
-    } else if ((!req.body.itemId || req.body.itemId.length < 3)) {
-        res.status(400).send('Mohon isi  itemId lebih dari 3 character')
-        return;
-    } else if ((!Number(req.body.itemId))) {
-        res.status(400).send('Mohon isi dengan angka')
+    if (!Number(createDb.userId) && !Number(createDb.friendId) && !Number(createDb.itemId) && !Number(createDb.nominal)) {
+        res.status(400).send('Mohon isi  userId dengan angka')
         return;
     } else {
         db.push(createDb)

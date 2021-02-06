@@ -1,5 +1,6 @@
 const express = require("express")
 const db = require("../db/dbFriends")
+const { post } = require("./itemRoute")
 const app = express.Router()
 
 // CRUD Friend
@@ -47,17 +48,16 @@ app.post("/friend", (req, res) => {
         userId: req.body.userId,
         name: req.body.name
     }
-    if (!req.body.name || req.body.name.length < 3) {
-        res.status(400).send('Mohon isi name lebih dari 3 character')
+    if (createDb.name.length <= 1 && typeof createDb.name === "string") {
+        res.status(400).send('Mohon isi name character string')
         return;
-    } else if ((!req.body.userId || req.body.userId.length < 3)) {
-        res.status(400).send('Mohon isi  userId lebih dari 3 character')
+    } else if (!Number(createDb.userId)) {
+        res.status(400).send('Mohon isi  userId dengan angka')
         return;
     } else {
         db.push(createDb)
         res.send(req.body)
     }
-
 })
 
 
