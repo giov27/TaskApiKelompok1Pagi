@@ -1,0 +1,19 @@
+{
+  "name": "learnmiddleware",
+  "version": "1.0.0",
+  "description": "belajar middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "1111"
+  ],
+  "author": "mufidatunnisa",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
