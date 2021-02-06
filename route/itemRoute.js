@@ -3,17 +3,22 @@ const dbItems = require("../db/dbItems")
 const db = require("../db/dbItems")
 const app = express.Router()
 
-app.get('/item/:index', (req, res) => {
-    res.send(db[req.params.index])
+// CRUD Item
+app.put('/item/:id', (req, res) => {
+    db[req.params.id] = req.body
+    res.send(req.body)
 })
 
-app.get('/item/', (req, res) => {
-    res.send(db)
-})
-// put Item
 app.put('/item/:id', (req, res) => {
-    db[req.params.index] = req.body
-    res.send(req.body)
+    const id = req.params.id
+    if (!Number(id)) {
+        res.status(400).send("hayoo id hayoo")
+    } else if ((db.length - 1) < Number(id)) {
+        res.status(400).send("apakah anda memasukkan id dengan benar?")
+    } else {
+        db[req.params.id] = req.body
+        res.send(req.body)
+    }
 })
 
 //delete Item

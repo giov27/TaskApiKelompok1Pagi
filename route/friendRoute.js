@@ -3,43 +3,22 @@ const dbFriends = require("../db/dbFriends")
 const db = require("../db/dbFriends")
 const app = express.Router()
 
-app.get("/friend", (req, res) => {
-    res.send(db)
-})
-
-app.get("/friend/:id", (req, res) => {
-    const id = req.params.id
-    var index = db.map(function (friend) {
-        return friend.id
-    }).indexOf(Number(id));
-    if (db[index] === undefined) {
-        res.status(400).send("Data not found")
-    } else {
-        res.send(db[index])
-    }
-})
-
-app.get('/eror', (req, res) => {
-    console.log(message)
-    message = "Ini halaman Eror"
-    // eror tampil di node
-})
-
-app.post("/friend/", (req, res) => {
-    db.push(req.body)
-    res.send(req.body)
-})
-
-app.get('/eror', (req, res) => {
-    console.log("Ini Halaman Eror")
-    // eror tampil di node
-})
-
-
-// put Friend
+// CRUD Friend
 app.put('/friend/:id', (req, res) => {
-    db[req.params.index] = req.body
+    db[req.params.id] = req.body
     res.send(req.body)
+})
+
+app.put('/friend/:id', (req, res) => {
+    const id = req.params.id
+    if (!Number(id)) {
+        res.status(400).send("hayooo lupa temen nih")
+    } else if ((db.length - 1) < Number(id)) {
+        res.status(400).send("teman anda sudah bener?")
+    } else {
+        db[req.params.id] = req.body
+        res.send(req.body)
+    }
 })
 
 //delete Friend

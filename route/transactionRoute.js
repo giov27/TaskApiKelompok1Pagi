@@ -4,10 +4,22 @@ const db = require("../db/dbTransactions")
 const app = express.Router()
 
 
-// put Transaction
-app.put('/Transaction/:id', (req, res) => {
+// CRUD Transaction
+app.put('/transaction/:id', (req, res) => {
     db[req.params.index] = req.body
     res.send(req.body)
+})
+
+app.put('/transaction/:id', (req, res) => {
+    const id = req.params.id
+    if (!Number(id)) {
+        res.status(400).send("hayoo id hayoo")
+    } else if ((db.length - 1) < Number(id)) {
+        res.status(400).send("apakah anda memasukkan id dengan benar?")
+    } else {
+        db[req.params.id] = req.body
+        res.send(req.body)
+    }
 })
 
 //delete Transaction
