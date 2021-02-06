@@ -14,6 +14,12 @@ const port = 3000
 app.use(express.json());
 app.use(rootRoute, itemRoute, friendRoute, transactionRoute, loginRegister)
 
+//Handle error
+app.use(function (eror, req, res, next) {
+    console.log(eror)
+    res.status(500).send(eror.message)
+})
+
 app.listen(port, () => {
     console.log(`server is listening on http://localhost:${port}`);
 })  
