@@ -45,10 +45,5 @@ app.post("/transaction", (req, res) => {
         res.send(req.body)
     }
 })
-app.get('/eror', (req, res) => {
-    console.log(message)
-    message = "Ini halaman Eror"
-    // eror tampil di node
-})
 
 module.exports = app

@@ -18,12 +18,6 @@ app.get("/friend/:id", (req, res) => {
     }
 })
 
-app.get('/eror', (req, res) => {
-    console.log(message)
-    message = "Ini halaman Eror"
-    // eror tampil di node
-})
-
 app.post("/friend", (req, res) => {
     const createDb = {
         id: db.length + 1,

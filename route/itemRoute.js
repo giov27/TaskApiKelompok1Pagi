@@ -1,4 +1,3 @@
-const Joi = require('joi')
 const express = require('express')
 const db = require("../db/dbItems")
 const app = express.Router()
@@ -37,10 +36,5 @@ app.post("/item", (req, res) => {
 
 })
 
-app.get('/eror', (req, res) => {
-    console.log(message)
-    message = "Ini halaman Eror"
-    // eror tampil di node
-})
 
 module.exports = app
