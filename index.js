@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 
-const itemRoute = require('./route/itemRoute'); //import the route file
+const itemRoute = require('./route/loginRegister'); //import the route file
 
 // Define the middleware for the extended functionality in express
 app.use(express.json());
