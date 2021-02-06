@@ -24,14 +24,24 @@ app.get('/eror', (req, res) => {
     // eror tampil di node
 })
 
-app.post("/friend/", (req, res) => {
-    db.push(req.body)
-    res.send(req.body)
+app.post("/friend", (req, res) => {
+    const createDb = {
+        id: db.length + 1,
+        userId: req.body.userId,
+        name: req.body.name
+    }
+    if (!req.body.name || req.body.name.length < 3) {
+        res.status(400).send('Mohon isi name lebih dari 3 character')
+        return;
+    } else if ((!req.body.userId || req.body.userId.length < 3)) {
+        res.status(400).send('Mohon isi  userId lebih dari 3 character')
+        return;
+    } else {
+        db.push(createDb)
+        res.send(req.body)
+    }
+
 })
 
-app.get('/eror', (req, res) => {
-    console.log("Ini Halaman Eror")
-    // eror tampil di node
-})
 
 module.exports = app

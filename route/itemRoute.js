@@ -1,3 +1,4 @@
+const Joi = require('joi')
 const express = require('express')
 const db = require("../db/dbItems")
 const app = express.Router()
@@ -16,6 +17,24 @@ app.get("/item/:id", (req, res) => {
     } else {
         res.send(db[index])
     }
+})
+app.post("/item", (req, res) => {
+    const createDb = {
+        id: db.length + 1,
+        userId: req.body.userId,
+        name: req.body.name
+    }
+    if (!req.body.name || req.body.name.length < 3) {
+        res.status(400).send('Mohon isi name lebih dari 3 character')
+        return;
+    } else if ((!req.body.userId || req.body.userId.length < 3)) {
+        res.status(400).send('Mohon isi  userId lebih dari 3 character')
+        return;
+    } else {
+        db.push(createDb)
+        res.send(req.body)
+    }
+
 })
 
 app.get('/eror', (req, res) => {
