@@ -1,4 +1,5 @@
 const express = require("express")
+const dbFriends = require("../db/dbFriends")
 const db = require("../db/dbFriends")
 const app = express.Router()
 

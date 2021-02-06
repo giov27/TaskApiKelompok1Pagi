@@ -22,8 +22,8 @@ app.put('/item/:id', (req, res) => {
     } else if (!Number(a.includes(id))) {
         res.status(400).send("Cannot update")
     } else {
-        var index = db.map(function (items) {
-            return items.id
+        var index = db.map(function (item) {
+            return item.id
         }).indexOf(id);
         db[index] = req.body
         res.send(req.body)
