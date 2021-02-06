@@ -1,18 +1,19 @@
 const express = require("express")
 const app = express()
 
-const itemRoute = require('./route/loginRegister'); //import the route file
+//route
+const loginRegister = require('./route/loginRegister'); //import the route file
+const rootRoute = require('./route/rootRoute')
+const itemRoute = require('./route/itemRoute')
+const friendRoute = require('./route/friendRoute')
+const transactionRoute = require('./route/transactionRoute')
+//Port
+const port = 3000
 
 // Define the middleware for the extended functionality in express
 app.use(express.json());
-app.use(itemRoute);
-
-const port = 3000
-
-//middleware 
-app.use(express.json()) //bawaan express
-app.use(itemRoute) //buat sendiri
+app.use(rootRoute, itemRoute, friendRoute, transactionRoute, loginRegister)
 
 app.listen(port, () => {
     console.log(`server is listening on http://localhost:${port}`);
-})
+})  
