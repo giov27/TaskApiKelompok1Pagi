@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 
 //route
-const loginRegister = require('./route/loginRegister'); //import the route file
+const loginRegister = require('./route/registerRoute'); //import the route file
 const rootRoute = require('./route/rootRoute')
 const itemRoute = require('./route/itemRoute')
 const friendRoute = require('./route/friendRoute')
