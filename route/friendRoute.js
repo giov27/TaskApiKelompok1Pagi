@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-const express = require("express")
-const db = require("../db/dbFriends")
-const app = express.Router()
-
-// CRUD Friend
-app.put('/friend/:id', (req, res) => {
-    db[req.params.id] = req.body
-    res.send(req.body)
-})
-
-app.put('/friend/:id', (req, res) => {
-    const id = req.params.id
-    if (!Number(id)) {
-        res.status(400).send("hayooo lupa temen nih")
-    } else if ((db.length - 1) < Number(id)) {
-        res.status(400).send("teman anda sudah bener?")
-    } else {
-        db[req.params.id] = req.body
-        res.send(req.body)
-    }
-})
-
-=======
 const express = require("express")
 const db = require("../db/dbFriends")
 const app = express.Router()
@@ -42,7 +18,9 @@ app.put('/friend/:id', (req, res) => {
     console.log(a.includes(id));
     if (a.includes(id) === false) {
         console.log("ini salah");
-        res.status(400).send("salah memasukan id")
+        res.status(400).send("tolong masukan id friend dengan benar")
+    } else if (!Number(a.includes(id))) {
+        res.status(400).send("Cannot update")
     } else {
         var index = db.map(function (friends) {
             return friends.id
@@ -53,37 +31,54 @@ app.put('/friend/:id', (req, res) => {
     }
 })
 
-app.get("/friend/:id", (req, res) => {
-    const id = req.params.id
-    var index = db.map(function (friend) {
-        return friend.id
-    }).indexOf(Number(id));
-    if (db[index] === undefined) {
-        res.status(400).send("Data not found")
-    } else {
-        res.send(db[index])
-    }
-})
-
-app.post("/friend", (req, res) => {
+app.put("/friend", (req, res) => {
     const createDb = {
-        id: db.length + 1,
+        id: db.length,
         userId: req.body.userId,
         name: req.body.name
     }
-    if (!req.body.name || req.body.name.length < 3) {
-        res.status(400).send('Mohon isi name lebih dari 3 character')
+    if (!db.length || db.length < 1) {
+        res.status(400).send('Mohon isi id dengan benar')
         return;
-    } else if ((!req.body.userId || req.body.userId.length < 3)) {
-        res.status(400).send('Mohon isi  userId lebih dari 3 character')
+    } else if ((!req.body.userId || req.body.userId < 1)) {
+        res.status(400).send('Mohon isi id dengan benar')
         return;
     } else {
-        db.push(createDb)
+        db.friend(createDb)
         res.send(req.body)
     }
-
 })
 
+// app.get("/friend/:id", (req, res) => {
+//     const id = req.params.id
+//     var index = db.map(function (friend) {
+//         return friend.id
+//     }).indexOf(Number(id));
+//     if (db[index] === undefined) {
+//         res.status(400).send("Data not found")
+//     } else {
+//         res.send(db[index])
+//     }
+// })
 
->>>>>>> 91c97a8aad21393ab6d670a38691f4d1d2b54687
+// app.post("/friend", (req, res) => {
+//     const createDb = {
+//         id: db.length + 1,
+//         userId: req.body.userId,
+//         name: req.body.name
+//     }
+//     if (!req.body.name || req.body.name.length < 3) {
+//         res.status(400).send('Mohon isi name lebih dari 3 character')
+//         return;
+//     } else if ((!req.body.userId || req.body.userId.length < 3)) {
+//         res.status(400).send('Mohon isi  userId lebih dari 3 character')
+//         return;
+//     } else {
+//         db.push(createDb)
+//         res.send(req.body)
+//     }
+
+// })
+
+
 module.exports = app
