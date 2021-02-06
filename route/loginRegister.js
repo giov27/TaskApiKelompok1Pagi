@@ -1,6 +1,6 @@
 const { response } = require("express")
 const express = require("express")
-const db = require("../dbRegister")
+const db = require("../db/dbRegister")
 const app = express.Router()
 
 // Get the User's Data in DB
