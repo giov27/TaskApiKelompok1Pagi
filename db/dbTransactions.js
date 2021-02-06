@@ -1,16 +1,16 @@
 module.exports = [
-    {
-        id: 1,
-        userId: "User1",
-        friendId: "Friends1",
-        itemId: "Items1",
-        nominal: 10000
-    },
-    {
-        id: 2,
-        userId: "User1",
-        friendId: "Friends2",
-        itemId: "Items2",
-        nominal: 20000
-    }
+        {
+                id: 1,
+                userId: 1,
+                friendId: 2, //maman from dbFriends
+                itemId: 1, //meja from dbItems
+                nominal: 10000
+        },
+        {
+                id: 2,
+                userId: 2,
+                friendId: 3,
+                itemId: 4,
+                nominal: 20000
+        }
 ]
