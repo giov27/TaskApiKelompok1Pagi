@@ -1,5 +1,5 @@
 const express = require("express")
-const db = require("../db")
+const db = require("../db/dbItems")
 const app = express.Router()
 
 // CRUD Item
@@ -20,16 +20,23 @@ app.put('/item/:id', (req, res) => {
     }
 })
 
-// app.put("/item/:id", (req, res) => {
-//     const id = req.params.id
-//     var index = db.map(function (item) {
-//         return item.id
-//     }).indexOf(Number(id));
-//     if (db[index] === undefined) {
-//         res.status(400).send("hayohloh data nggak ada")
-//     } else {
-//         res.send(db[index])
-//     }
-// })
+//delete Transaction
+app.delete('/item/:id', (req, res) => {
+    const id = Number(req.params.id)
+    var a = [];
+    db.forEach(function (obj) {
+        a.push(obj.id);
+    })
+    
+    if (a.includes(id) === false) {
+        res.status(400).send("gagal delete, id tidak ditemukan")
+    } else {
+        var index = db.map(function (items) {
+            return items.id
+        }).indexOf(id);
+        const deletedItem = db.splice(index, 1)
+        res.send(deletedItem)
+    }
+})
 
 module.exports = app
