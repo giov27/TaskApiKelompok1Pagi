@@ -11,12 +11,19 @@ app.put('/Transaction/:id', (req, res) => {
 })
 
 //delete Transaction
-app.delete('/Transaction/:index', (req, res) => {
-    const index = req.params.index 
-    if((dbTransactions.length-1) < index){
-        res.status(404).send('data tidak ada pada sistem')
-    }
-    else{
+app.delete('/Transaction/:id', (req, res) => {
+    const id = Number(req.params.id)
+    var a = [];
+    db.forEach(function (obj) {
+        a.push(obj.id);
+    })
+    
+    if (a.includes(id) === false) {
+        res.status(400).send("gagal delete, id tidak ditemukan")
+    } else {
+        var index = db.map(function (transactions) {
+            return transactions.id
+        }).indexOf(id);
         const deletedItem = db.splice(index, 1)
         res.send(deletedItem)
     }
