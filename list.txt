@@ -1,0 +1,4 @@
+List kerjaan:
+1. handling error property yang tdk diinginkan(all part)
+2. auto increment id disamain(udah ada), tinggal copy ke post
+3. 
