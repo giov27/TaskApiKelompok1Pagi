@@ -17,6 +17,7 @@ app.get("/item/:id", (req, res) => {
         res.send(db[index])
     }
 })
+
 app.post("/item", (req, res) => {
     const createDb = {
         id: db.length + 1,
