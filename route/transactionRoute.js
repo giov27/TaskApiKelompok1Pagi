@@ -48,7 +48,7 @@ app.post("/transaction", (req, res) => {
     } else if (typeof createDb.nominal !== "number") {
         res.status(400).send("Silahkan memasukkan nominal yang sesuai")
     } else {
-        db.put(createDb)
+        db.push(createDb)
         res.send(req.body)
     }
 })
@@ -76,11 +76,9 @@ app.put('/transaction/:id', (req, res) => {
     function arrayEqual(checkA, checkB) {
         return (checkA.length === checkB.length) && (checkA.every(val => checkB.includes(val)));
     }
-    if (!Number(a.includes(id))) {
-        res.status(400).send("Silahkan memasukkan angka pada ID")
-    } else if (a.includes(id) === false) {
-        res.status(400).send("salah memasukan ID")
-    } else if (!arrayEqual(a, b)) {
+    if (a.includes(id) === false) {
+        res.status(400).send("Silahkan memasukkan ID yang benar")
+    } else if (!arrayEqual(checkA, checkB)) {
         res.status(400).send("Mohon maaf anda memasukkan property yang tidak sesuai")
     } else if (typeof createDb.userId !== "number" || typeof createDb.friendId !== "number" || typeof createDb.itemId !== "number") {
         res.status(400).send("Silahkan memasukkan ID yang sesuai")

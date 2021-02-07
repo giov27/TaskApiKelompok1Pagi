@@ -72,10 +72,8 @@ app.put('/item/:id', (req, res) => {
         return (checkA.length === checkB.length) && (checkA.every(val => checkB.includes(val)));
     }
 
-    if (!Number(a.includes(id))) {
-        res.status(400).send("Silahkan memasukkan angka pada ID")
-    } else if (a.includes(id) === false) {
-        res.status(400).send("Salah memasukan ID")
+    if (a.includes(id) === false) {
+        res.status(400).send("Silahkan memasukkan ID yang benar")
     } else if (!arrayEqual(checkA, checkB)) {
         res.status(400).send("Mohon maaf anda memasukkan property yang tidak sesuai")
     } else if (typeof createDb.name !== "string") {

@@ -20,9 +20,16 @@ app.use(express.json());
 app.use(itemRoute, friendRoute, transactionRoute, authRoute)
 
 //Handle error
-app.use(function (error, req, res, next) {
-    console.log(error)
-    res.status(500).send(error.message)
+// app.get('*', function (error, req, res, next) {
+//     console.log(error)
+//     res.status(500).send(error.message)
+// })
+
+app.use((req, res, next) => {
+    res.status(404).send({
+        status: 404,
+        error: "Halaman tidak ditemukan. Silahkan coba kembali :)"
+    })
 })
 
 app.listen(port, () => {
