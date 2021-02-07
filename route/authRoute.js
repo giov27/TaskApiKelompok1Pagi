@@ -9,7 +9,7 @@ const dbLogin = require('../db/dbAuth')
 // Get the User's Data in DB
 app.get('/user_list', (req, res) => {
     let data = fs.readFileSync(path, 'utf8');
-    // trim = spasi
+    // trim = remove spasi kiri kanan
     data = data.replace('module.exports = ', '').trim();
     data = JSON.parse(data);
     res.json(data);
