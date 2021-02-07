@@ -2,6 +2,7 @@ const express = require("express")
 const app = express.Router()
 const fs = require('fs')
 const path = (`${__rootdir}/db.js`)
+const dbLogin = require('../db')
 
 // Get the User's Data in DB
 app.get('/user_list', (req, res) => {
@@ -60,12 +61,11 @@ app.post('/auth', (req, res) => {
         username,
         password
     } = req.body
-    // console.log(db.find(item => item.username === username));
-    if (username.length > 0 && db.find(item => item.username === username)) {
-        const index = db.findIndex(item => item.username === username)
+    if (username.length > 0 && dbLogin.find(item => item.username === username)) {
+        const index = dbLogin.findIndex(item => item.username === username)
         // console.log(index);
-        if (db[index].password === password) {
-            res.send(`Hello ${username}, \n Click to see: \n Items : http://localhost:3000/${db[index].id}/item \n Friends: http://localhost:3000/${db[index].id}/friend `)
+        if (dbLogin[index].password === password) {
+            res.send(`Hello ${username}, \n Click to see: \n Items : http://localhost:3000/item/${dbLogin[index].id} \n Friends: http://localhost:3000/friend/${dbLogin[index].id} `)
         } else {
             res.status(400).send("Your password is incorrect")
         }
