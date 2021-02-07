@@ -1,8 +1,8 @@
 const express = require("express")
 const app = express.Router()
 const fs = require('fs')
-const path = (`${__rootdir}/db.js`)
-const dbLogin = require('../db')
+const path = (`${__rootdir}/db/db.js`)
+const dbLogin = require('../db/db')
 
 // Get the User's Data in DB
 app.get('/user_list', (req, res) => {
