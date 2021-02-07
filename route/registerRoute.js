@@ -75,7 +75,6 @@ app.post('/register', (req, res) => {
 //Login feature
 app.post('/auth', (req, res) => {
     const {
-        id,
         username,
         password
     } = req.body
