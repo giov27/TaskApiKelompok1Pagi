@@ -8,7 +8,6 @@ app.get('/user_list', (req, res) => {
     res.send(`Total user: ${db.length}`)
 });
 
-//Register Feature
 app.post('/register', (req, res) => {
     const {
         username,

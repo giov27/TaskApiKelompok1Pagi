@@ -34,13 +34,25 @@ app.post("/transaction", (req, res) => {
     const createDb = {
         id: db.length + 1,
         userId: req.body.userId,
-        friendId: req.body.freindId,
+        friendId: req.body.friendId,
         itemId: req.body.itemId,
         nominal: req.body.nominal
     }
-    if (!Number(createDb.userId) && !Number(createDb.friendId) && !Number(createDb.itemId) && !Number(createDb.nominal)) {
-        res.status(400).send('Mohon isi  userId dengan angka')
-        return;
+    var a = [];
+    Object.keys(req.body).forEach(function (obj) {
+        a.push(obj);
+    })
+    a.push("id")
+    var b = Object.keys(createDb);
+    function arrayEqual(a, b) {
+        return (a.length === b.length) && (a.every(val => b.includes(val)));
+    }
+    if (!arrayEqual(a, b)) {
+        res.status(400).send("Mohon maaf anda memasukkan property yang tidak sesuai")
+    } else if (typeof createDb.userId !== "number" || typeof createDb.friendId !== "number" || typeof createDb.itemId !== "number") {
+        res.status(400).send("Silahkan memasukkan ID yang sesuai")
+    } else if (typeof createDb.nominal !== "number") {
+        res.status(400).send("Silahkan memasukkan nominal yang sesuai")
     } else {
         db.push(createDb)
         res.send(req.body)
