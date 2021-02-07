@@ -1,36 +1,28 @@
 const express = require("express")
 const db = require("../db/dbItems")
+// const dbAuth = require("../db/dbAuth")
 const app = express.Router()
 
 // CRUD Item
-app.put('/item/:id', (req, res) => {
-    const id = req.params.id
-    if (!Number(id)) {
-        res.status(400).send("hayoo id hayoo")
-    } else if ((db.length - 1) < Number(id)) {
-        res.status(400).send("apakah anda memasukkan id dengan benar?")
-    } else {
-        db[req.params.id] = req.body
-        res.send(req.body)
-    }
-})
-
+// Get all item
 app.get("/item", (req, res) => {
     res.send(db)
 })
 
+// Get item by id
 app.get("/item/:id", (req, res) => {
     const id = req.params.id
     var index = db.map(function (item) {
         return item.id
     }).indexOf(Number(id));
     if (db[index] === undefined) {
-        res.status(400).send("Data not found")
+        res.status(400).send("Data tidak ditemukan")
     } else {
         res.send(db[index])
     }
 })
 
+// Post new item
 app.post("/item", (req, res) => {
     const createDb = {
         id: db.length + 1,
@@ -56,17 +48,69 @@ app.post("/item", (req, res) => {
         db.push(createDb)
         res.send(req.body)
     }
-
-    // if (createDb.name.length <= 1 && typeof createDb.name === "string") {
-    //     res.status(400).send('Mohon isi name character string')
-    //     return;
-    // } else if (!Number(createDb.userId)) {
-    //     res.status(400).send('Mohon isi  userId dengan angka')
-    //     return;
-    // } else {
-
-    // }
 })
 
+// Put item by id
+app.put('/item/:id', (req, res) => {
+    const id = Number(req.params.id)
+    const createDb = {
+        id: req.body.id,
+        userId: req.body.userId,
+        name: req.body.name
+    }
+    var a = [];
+    db.forEach(function (obj) {
+        a.push(obj.id);
+    })
+    var checkA = [];
+    Object.keys(req.body).forEach(function (obj) {
+        checkA.push(obj);
+    })
+    checkA.push("id")
+    var checkB = Object.keys(createDb);
+    function arrayEqual(checkA, checkB) {
+        return (checkA.length === checkB.length) && (checkA.every(val => checkB.includes(val)));
+    }
+
+    if (!Number(a.includes(id))) {
+        res.status(400).send("Silahkan memasukkan angka pada ID")
+    } else if (a.includes(id) === false) {
+        res.status(400).send("Salah memasukan ID")
+    } else if (!arrayEqual(checkA, checkB)) {
+        res.status(400).send("Mohon maaf anda memasukkan property yang tidak sesuai")
+    } else if (typeof createDb.name !== "string") {
+        res.status(400).send("Silahkan memasukkan nama yang sesuai")
+    } else if (typeof createDb.userId !== "number") {
+        res.status(400).send("Silahkan memasukkan ID user yang sesuai")
+    } else {
+        var index = db.map(function (item) {
+            return item.id
+        }).indexOf(id);
+        db[index] = {
+            id,
+            userId: req.body.userId,
+            name: req.body.name
+        }
+        res.send(req.body)
+    }
+})
+
+// Delete item by id
+app.delete('/item/:id', (req, res) => {
+    const id = Number(req.params.id)
+    var a = [];
+    db.forEach(function (obj) {
+        a.push(obj.id);
+    })
+    if (a.includes(id) === false) {
+        res.status(400).send("Data tidak dapat dihapus, ID tidak ditemukan")
+    } else {
+        var index = db.map(function (items) {
+            return items.id
+        }).indexOf(id);
+        const deletedItem = db.splice(index, 1)
+        res.send(deletedItem)
+    }
+})
 
 module.exports = app

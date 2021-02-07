@@ -1,23 +1,28 @@
+global.__rootdir = __dirname;
 const express = require("express")
 const app = express()
+const bodyParser = require('body-parser'); //import the route file
 
 //route
-const loginRegister = require('./route/registerRoute'); //import the route file
-const rootRoute = require('./route/rootRoute')
+const authRoute = require('./route/authRoute'); //import the route file
 const itemRoute = require('./route/itemRoute')
 const friendRoute = require('./route/friendRoute')
 const transactionRoute = require('./route/transactionRoute')
+
 //Port
 const port = 3000
 
 // Define the middleware for the extended functionality in express
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(express.json());
-app.use(rootRoute, itemRoute, friendRoute, transactionRoute, loginRegister)
+app.use(itemRoute, friendRoute, transactionRoute, authRoute)
 
 //Handle error
-app.use(function (eror, req, res, next) {
-    console.log(eror)
-    res.status(500).send(eror.message)
+app.use(function (error, req, res, next) {
+    console.log(error)
+    res.status(500).send(error.message)
 })
 
 app.listen(port, () => {
