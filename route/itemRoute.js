@@ -1,70 +1,60 @@
 const express = require("express")
-const db = require("../dbRegister")
 const app = express.Router()
 const fs = require('fs')
 const path = (`${__rootdir}/db.js`)
-console.log(__rootdir);
 
 // Get the User's Data in DB
 app.get('/user_list', (req, res) => {
-    res.send(`Total user: ${db.length}`)
+    let data = fs.readFileSync(path, 'utf8');
+    data = data.replace('module.exports = ', '').trim();
+    data = JSON.parse(data);
+    res.json(data);
 });
 
 //Register Feature
 app.post('/register', (req, res) => {
     const {
-        id,
         username,
         password
     } = req.body
     let db;
     try {
-        db = require(path);
+        validateLetter(username);
     } catch (err) {
-        db = fs.readFileSync(path);
-        db = db.replace('module.exports = ', '');
-        db = JSON.parse(db);
+        console.log(err);
+        res.status(400).send("Invalid username! \n Only letter and numbers are allowed. No spaces.");
     }
-    console.log(db);
-    if (db.length === 0) {
-        db.push({
-            id,
-            username,
-            password
-        })
-        console.log(db);
-        fs.writeFileSync(path, JSON.stringify(`module.exports = ${JSON.stringify(db)}`))
-        res.json({
-            'status': 'OK',
-            'description': 'Akun berhasil didaftarkan'
-        })
-    } else if (db.length > 0 && db.find(item => item.username === username)) {
+    const data = fs.readFileSync(path, 'utf8'); //change to string for the content because its array buffer if do not use the utf8
+    db = data.replace('module.exports = ', '').trim();
+    db = JSON.parse(db); //parse to JSON array
+    if (db.length > 0 && db.find(item => item.username === username)) {
         res.json({
             'status': 'WARNING',
-            'description': 'Username sudah terdaftar. Silakan gunakan username lain'
+            'description': 'Username has been registered. Please input another username!'
         })
     } else {
         db.push({
-            id,
+            id: db.length + 1,
             username,
             password
         });
-        fs.writeFileSync(path, JSON.stringify(`module.exports = ${JSON.stringify(db)}`));
+        fs.writeFileSync(path, `module.exports = ${JSON.stringify(db)}`);
         res.json({
             'status': 'OK',
-            'description': 'Username berhasil ditambahkan',
+            'description': 'Username has been added!',
         })
     }
 });
-// const forbiddenChar = "@", "+", "{", "}", "?"
-const splitstring = username.split("")
-console.log(splitstring.includes('@') === false);
-if (username.length > 0 && splitstring.includes('@') === false) {
-    db.push(req.body)
-    db[db.length - 1].id = db.length
-    res.send(req.body)
-} else {
-    res.send("username can't use")
+
+// Checking the character of username input
+function validateLetter(username) {
+    let textInput = username;
+    var replacedInput = textInput.replace(/[^A-Za-z0-9]/g, "");
+    if (textInput != replacedInput) {
+        throw NonMatchError;
+    } else {
+        return username;
+    }
 }
 
 //Login feature
