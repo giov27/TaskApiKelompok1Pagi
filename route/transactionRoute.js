@@ -33,7 +33,7 @@ app.put('/transaction/:id', (req, res) => {
     }
 })
 
-app.put("/transaction", (req, res) => {
+app.post("/transaction", (req, res) => {
     const createDb = {
         id: db.length,
         userId: req.body.userId,

@@ -31,7 +31,7 @@ app.put('/item/:id', (req, res) => {
     }
 })
 
-app.put("/item", (req, res) => {
+app.post("/item", (req, res) => {
     const createDb = {
         id: db.length,
         userId: req.body.userId,
