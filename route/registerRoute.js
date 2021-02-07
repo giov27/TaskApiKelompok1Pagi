@@ -56,16 +56,20 @@ app.post('/register', (req, res) => {
         })
     }
 });
-// const forbiddenChar = "@", "+", "{", "}", "?"
-const splitstring = username.split("")
-console.log(splitstring.includes('@') === false);
-if (username.length > 0 && splitstring.includes('@') === false) {
-    db.push(req.body)
-    db[db.length - 1].id = db.length
-    res.send(req.body)
-} else {
-    res.send("username can't use")
+
+//check username is valid
+function validateLetter() {
+    var textInput = username;
+    var replacedInput = textInput.replace(/[^A-Za-z0-9]/g, "");
+    if (textInput != replacedInput) {
+        res.status(400).send("Invalid username! \n Only letter and numbers are allowed. No spaces.");
+    } else {
+        return username;
+    }
+
+
 }
+console.log(validateLetter());
 
 //Login feature
 app.post('/auth', (req, res) => {
@@ -73,7 +77,7 @@ app.post('/auth', (req, res) => {
         username,
         password
     } = req.body
-    console.log(db.find(item => item === username));
+    // console.log(db.find(item => item.username === username));
     if (username.length > 0 && db.find(item => item.username === username)) {
         const index = db.findIndex(item => item.username === username)
         // console.log(index);
