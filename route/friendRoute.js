@@ -2,9 +2,17 @@ const express = require("express")
 const db = require("../db/dbFriends")
 const { post } = require("./itemRoute")
 const app = express.Router()
+const dbUser = require('../db/db')
 
 // CRUD Friend
-app.get("/friend", (req, res) => {
+app.get("/:user/friend", (req, res) => {
+    const user = Number(req.params.user)
+    const find = dbUser.find(item => item.id === user)
+    var elem = []
+    validation.valid(find, user, elem, db)
+    console.log('elem:', elem);
+    // console.log('ini send: ', send);
+    res.send(elem)
     res.send(db)
 })
 
