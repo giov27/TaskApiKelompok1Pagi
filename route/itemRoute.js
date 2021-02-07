@@ -1,6 +1,3 @@
-const {
-    response
-} = require("express")
 const express = require("express")
 const db = require("../dbRegister")
 const app = express.Router()
