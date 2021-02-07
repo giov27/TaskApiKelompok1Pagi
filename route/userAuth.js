@@ -28,10 +28,7 @@ app.post('/register', (req, res) => {
     db = data.replace('module.exports = ', '').trim();
     db = JSON.parse(db); //parse to JSON array
     if (db.length > 0 && db.find(item => item.username === username)) {
-        res.json({
-            'status': 'WARNING',
-            'description': 'Username has been registered. Please input another username!'
-        })
+        res.status(400).send("Warning! \n Username has been registered. Please input another username!")
     } else {
         db.push({
             id: db.length + 1,
