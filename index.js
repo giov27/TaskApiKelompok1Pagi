@@ -19,12 +19,6 @@ app.use(bodyParser.urlencoded({
 app.use(express.json());
 app.use(itemRoute, friendRoute, transactionRoute, authRoute)
 
-//Handle error
-// app.get('*', function (error, req, res, next) {
-//     console.log(error)
-//     res.status(500).send(error.message)
-// })
-
 app.use((req, res, next) => {
     res.status(404).send({
         status: 404,

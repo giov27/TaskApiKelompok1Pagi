@@ -2,12 +2,25 @@ const express = require("express")
 const dbTransactions = require("../db/dbTransactions")
 const db = require("../db/dbTransactions")
 const app = express.Router()
+const dbAuth = require('../db/dbAuth')
+const validation = require('../function/function')
 
 
 // CRUD Transaction
 // Get all transaction
 app.get("/transaction", (req, res) => {
     res.send(db)
+})
+
+//Get by userId
+app.get("/:user/transaction", (req, res) => {
+    const user = Number(req.params.user)
+    const find = dbAuth.find(item => item.id === user)
+    var elem = []
+    validation.valid(find, user, elem, db)
+    console.log('elem:', elem);
+    // console.log('ini send: ', send);
+    res.send(elem)
 })
 
 // Get transaction by id

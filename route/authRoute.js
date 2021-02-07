@@ -28,6 +28,7 @@ app.post('/register', (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(400).send("Username tidak valid! \n Hanya menerima huruf dan angka tanpa spasi.");
+
     }
     const data = fs.readFileSync(path, 'utf8'); //change to string for the content because its array buffer if do not use the utf8
     db = data.replace('module.exports = ', '').trim();
@@ -48,17 +49,6 @@ app.post('/register', (req, res) => {
     }
 });
 
-// Checking the character of username input
-// function validateLetter(username) {
-//     let textInput = username;
-//     var replacedInput = textInput.replace(/[^A-Za-z0-9]/g, "");
-//     if (textInput != replacedInput) {
-//         throw NonMatchError;
-//     } else {
-//         return username;
-//     }
-// }
-
 //Login feature
 app.post('/auth', (req, res) => {
     const {
@@ -69,7 +59,10 @@ app.post('/auth', (req, res) => {
         const index = dbLogin.findIndex(item => item.username === username)
         // console.log(index);
         if (dbLogin[index].password === password) {
-            res.send(`Hallo ${username}, \n Klik untuk melihat: \n Items : http://localhost:3000/item/${dbLogin[index].id} \n Friends: http://localhost:3000/friend/${dbLogin[index].id} `)
+            res.send(`Hallo ${username}, \n Klik untuk melihat: \n 
+            Items : http://localhost:3000/${dbLogin[index].id}/item \n 
+            Friends: http://localhost:3000/${dbLogin[index].id}/friend \n
+            Transactions: http://localhost:3000/${dbLogin[index].id}/transaction `)
         } else {
             res.status(400).send("Password yang anda masukkan salah")
         }

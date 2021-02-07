@@ -1,1 +1,1 @@
-module.exports = [{"id":1,"username":"Rohim34","password":"1"},{"id":2,"username":"Rohim@@","password":"1"},{"id":3,"username":"+====","password":"1"},{"id":4,"username":"-=,.","password":"1"},{"id":5,"username":"raaa@","password":"1"},{"id":6,"username":"raaa55","password":"1"},{"id":7,"username":"raaa55++","password":"1"}]
+module.exports = [{"id":1,"username":"Rohim","password":"1"},{"id":2,"username":"Chania","password":"12"},{"id":3,"username":"Siski","password":"123"},{"id":4,"username":"Giov","password":"1234"}]
