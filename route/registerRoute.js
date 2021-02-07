@@ -73,21 +73,19 @@ app.post('/auth', (req, res) => {
         username,
         password
     } = req.body
-    // const username = req.body.username
-    // const password = req.body.password
-    console.log(db.find(item => item.username === username));
+    console.log(db.find(item => item === username));
     if (username.length > 0 && db.find(item => item.username === username)) {
         const index = db.findIndex(item => item.username === username)
         // console.log(index);
         if (db[index].password === password) {
             res.send(`Hello ${username}, you will be redirect to home`)
         } else {
-            res.send(`Your password is incorrect`)
+            res.status(400).send("Your password is incorrect")
         }
     } else if (username.length > 0) {
-        res.send('Your username & password are incorrect')
+        res.status(400).send("Your username & password are incorrect")
     } else {
-        res.send('Please input your username')
+        res.status(400).send("Please input your username")
     }
 })
 
