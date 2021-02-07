@@ -3,6 +3,7 @@ const app = express.Router()
 const fs = require('fs')
 const path = (`${__rootdir}/db/db.js`)
 const dbLogin = require('../db/db')
+// const validateWord = require('../function/function')
 
 // Get the User's Data in DB
 app.get('/user_list', (req, res) => {
@@ -22,7 +23,7 @@ app.post('/register', (req, res) => {
     try {
         validateLetter(username);
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(400).send("Invalid username! \n Only letter and numbers are allowed. No spaces.");
     }
     const data = fs.readFileSync(path, 'utf8'); //change to string for the content because its array buffer if do not use the utf8

@@ -1,11 +1,33 @@
 const express = require("express")
 const db = require("../db/dbItems")
+const dbUser = require("../db/dbRegister")
 const app = express.Router()
+const validation = require('../function/function')
 
 // CRUD Item
-app.get("/item", (req, res) => {
-    res.send(db)
+app.get("/:user/item", (req, res) => {
+    const user = Number(req.params.user)
+    const find = dbUser.find(item => item.id === user)
+    var elem = []
+    validation.valid(find, user, elem, db)
+    console.log('elem:', elem);
+    // console.log('ini send: ', send);
+    res.send(elem)
 })
+//validating id
+// function valid(find, user, elem) {
+//     if (find === undefined) {
+//         console.log("idmu ga ada");
+//     } else {
+//         db.forEach(element => {
+//             // console.log('element:', element);
+//             if (element.userId === user) {
+//                 elem.push(element)
+//                 return elem;
+//             }
+//         });
+//     }
+// }
 
 app.put('/item/:id', (req, res) => {
     const id = Number(req.params.id)
