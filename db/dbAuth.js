@@ -1,4 +1,1 @@
-module.exports = [{ "id": 1, "username": "Rohim", "password": "1" },
-{ "id": 2, "username": "Chania", "password": "12" },
-{ "id": 3, "username": "Siski", "password": "123" },
-{ "id": 4, "username": "Giov", "password": "1234" }]
+module.exports = [{"id":1,"username":"Rohim","password":"1"},{"id":2,"username":"Chania","password":"12"},{"id":3,"username":"Siski","password":"123"},{"id":4,"username":"Giov","password":"1234"},{"id":5,"username":"Alya","password":"123456789"},{"id":6},{"id":7,"username":"Aliya","password":"123456789"},{"id":8,"username":"aliya","password":"123456789"},{"id":9,"username":"aliyya","password":"123456789"},{"id":10,"username":"aliyyaa","password":"123456789"},{"id":11,"username":"ms","password":"123456789"},{"id":12,"username":"lala","password":"123456789"},{"id":13,"username":"nana","password":"123456789"}]

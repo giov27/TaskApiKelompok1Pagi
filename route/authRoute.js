@@ -60,9 +60,9 @@ app.post('/auth', (req, res) => {
         // console.log(index);
         if (dbLogin[index].password === password) {
             res.send(`Hallo ${username}, \n Klik untuk melihat: \n 
-            Items : http://localhost:3000/${dbLogin[index].id}/item \n 
-            Friends: http://localhost:3000/${dbLogin[index].id}/friend \n
-            Transactions: http://localhost:3000/${dbLogin[index].id}/transaction `)
+            Items : http://localhost:3000/item/${dbLogin[index].id} \n 
+            Friends: http://localhost:3000/friend/${dbLogin[index].id} \n
+            Transactions: http://localhost:3000/transaction/${dbLogin[index].id} `)
         } else {
             res.status(400).send("Password yang anda masukkan salah")
         }
